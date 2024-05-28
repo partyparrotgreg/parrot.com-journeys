@@ -1,17 +1,15 @@
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
-import { campaingTemplates } from "../_data";
-import { JourneyTemplate } from "../_components/journey-template";
-import { Badge } from "@/components/ui/badge";
 import {
   Breadcrumb,
-  BreadcrumbList,
   BreadcrumbItem,
   BreadcrumbLink,
-  BreadcrumbSeparator,
+  BreadcrumbList,
   BreadcrumbPage,
+  BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
+import { Button } from "@/components/ui/button";
 import { Slash } from "lucide-react";
+import { JourneyTemplate } from "../_components/journey-template";
+import { campaingTemplates } from "../_data";
 
 export default function JourneyTemplatesPage() {
   return (

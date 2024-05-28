@@ -1,11 +1,7 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
-import {
-  type CampaingTypeEnum,
-  type ChannelsEnum,
-  type ICampaignProps,
-} from "../_data";
+import { type CampaingTypeEnum, type ICampaignProps } from "../_data";
 
 export const JourneyTemplate = ({ item }: { item: ICampaignProps }) => {
   return (

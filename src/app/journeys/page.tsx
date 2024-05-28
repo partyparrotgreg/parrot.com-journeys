@@ -1,8 +1,5 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { JourneyItem } from "./_components/journey-item";
-import { campaingTemplates } from "./_data";
-import { JourneyTemplate } from "./_components/journey-template";
 import Link from "next/link";
 
 export default function JourneyPageGroup() {
@@ -20,11 +17,7 @@ export default function JourneyPageGroup() {
         </div>
       </div>
       <div>Header</div>
-      <div className="grid grid-cols-3 gap-6">
-        {campaingTemplates.map((template, index) => (
-          <JourneyTemplate key={index} item={template} />
-        ))}
-      </div>
+      <div className="grid grid-cols-3 gap-6"></div>
     </main>
   );
 }
