@@ -1,4 +1,4 @@
-import { SidebarNav } from "@/components/common/sidebar-nav";
+import { SidebarNav } from "@/components/common/sidebar-nav/sidebar-nav";
 
 export default function RootTemplate({
   children,
