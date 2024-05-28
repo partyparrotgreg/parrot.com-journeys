@@ -85,29 +85,19 @@ export const campaingTemplates: CampaignType[] = [
   },
 ];
 
-export const journeyList = [
-  {
-    id: 1,
-    created: new Date(),
-    title: "Abandoned cart recovery",
-    description:
-      "Don't leave your carts abandoned! Recover them and drive up sales with this abandoned cart series.",
-    type: CampaingTypeEnum.STANDARD,
-    channels: [ChannelsEnum.EMAIL, ChannelsEnum.WHATSAPP],
-    tags: ["Shopify", "Email", "WhatsApp"],
-  },
-];
+
 
 export type JourneyType = {
   id: number;
   created: Date;
   updated: Date;
   title: string;
+  trigger: string;
   description?: string;
   type: CampaingTypeEnum;
   channels: ChannelsEnum[];
   tags: string[];
-  status: "active" | "inactive" | "draft";
+  status: "live" | "inactive" | "draft";
 };
 
 export const journeys: JourneyType[] = [
@@ -121,7 +111,8 @@ export const journeys: JourneyType[] = [
     type: CampaingTypeEnum.STANDARD,
     channels: [ChannelsEnum.EMAIL, ChannelsEnum.WHATSAPP],
     tags: ["Shopify", "Email", "WhatsApp"],
-    status: "active",
+    status: "live",
+    trigger: "Checkout abandoned",
   },
   {
     id: 2,
@@ -134,6 +125,7 @@ export const journeys: JourneyType[] = [
     channels: [ChannelsEnum.WHATSAPP],
     tags: ["List", "WhatsApp"],
     status: "inactive",
+    trigger: "New subscriber",
   },
   {
     id: 3,
@@ -146,6 +138,7 @@ export const journeys: JourneyType[] = [
     channels: [ChannelsEnum.WHATSAPP, ChannelsEnum.SMS, ChannelsEnum.EMAIL],
     tags: ["Shopify", "WhatsApp", "SMS", "Email"],
     status: "draft",
+    trigger: "Purchase made",
   },
   {
     id: 4,
@@ -157,7 +150,8 @@ export const journeys: JourneyType[] = [
     type: CampaingTypeEnum.STANDARD,
     channels: [ChannelsEnum.WHATSAPP],
     tags: ["Shopify", "WhatsApp"],
-    status: "active",
+    status: "live",
+    trigger: "Missing trigger",
   },
   {
     id: 5,
@@ -170,5 +164,7 @@ export const journeys: JourneyType[] = [
     channels: [ChannelsEnum.SMS],
     tags: ["List", "SMS"],
     status: "inactive",
+    trigger: "New subscriber",
   },
 ];
+

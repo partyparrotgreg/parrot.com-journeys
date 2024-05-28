@@ -1,6 +1,7 @@
 import "@/styles/globals.css";
 import { Inter as FontSans } from "next/font/google";
 
+import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
 import { AppStoreProvider } from "@/stores/app-store-provider";
@@ -31,6 +32,7 @@ export default function RootLayout({
         )}
       >
         <AppStoreProvider>
+          <Toaster />
           <TRPCReactProvider>
             <TooltipProvider>{children}</TooltipProvider>
           </TRPCReactProvider>

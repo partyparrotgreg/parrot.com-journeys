@@ -1,45 +1,45 @@
 "use client";
-
+import { Input } from "@/components/ui/input";
 import {
   createColumnHelper,
   flexRender,
   getCoreRowModel,
+  getFilteredRowModel,
   useReactTable,
+  type ColumnFiltersState,
 } from "@tanstack/react-table";
 import { useMemo, useState } from "react";
 import { journeys, type JourneyType } from "../_data";
+import { JourneyItem } from "./journey-item";
+import { StatusBox } from "./status-box";
 
 export const JourneysTable = () => {
+  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [data, setData] = useState<JourneyType[]>([...journeys]);
-  const fallbackData = useMemo(() => [], []);
   const columnHelper = createColumnHelper<JourneyType>();
 
   const columns = useMemo(
     () => [
+      columnHelper.accessor((row) => row.status, {
+        id: "status",
+        header: () => <span>Status</span>,
+      }),
       columnHelper.accessor((row) => row.title, {
         id: "title",
-        cell: (cell) => <div>{cell.getValue()}</div>,
         header: () => <span>Name</span>,
-      }),
-      columnHelper.accessor((row) => row.type, {
-        id: "type",
-        cell: (cell) => <div>{cell.getValue()}</div>,
-        header: () => <span>Type</span>,
-      }),
-      columnHelper.accessor((row) => row.updated, {
-        id: "updated",
-        cell: (cell) => <div>Date</div>,
-        header: () => <span>Description</span>,
       }),
       columnHelper.accessor((row) => row.channels, {
         id: "channels",
-        cell: (cell) => <div>{cell.getValue()}</div>,
         header: () => <span>Channels</span>,
       }),
-      columnHelper.accessor((row) => row.status, {
-        id: "status",
-        cell: (cell) => <div>{cell.getValue()}</div>,
-        header: () => <span>Channels</span>,
+      columnHelper.accessor((row) => row.tags, {
+        id: "tags",
+        header: () => <span>Tags</span>,
+      }),
+
+      columnHelper.accessor((row) => row.updated, {
+        id: "updated",
+        header: () => <span>Last updated</span>,
       }),
     ],
     [columnHelper],
@@ -48,41 +48,49 @@ export const JourneysTable = () => {
   const table = useReactTable({
     columns,
     data,
+    state: {
+      columnFilters,
+    },
     getCoreRowModel: getCoreRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
   });
 
   return (
-    <div>
-      <div>Bar</div>
-      <table>
-        <thead>
+    <div className="flex w-full flex-col gap-6">
+      <div className="flex flex-row gap-4">
+        <Input type="text" placeholder="Search..." />
+        <StatusBox />
+      </div>
+      <div className="flex grow flex-col gap-2">
+        <div className="overflow-hidden rounded-xl border border-slate-200">
           {table.getHeaderGroups().map((headerGroup) => (
-            <tr key={headerGroup.id}>
+            <div
+              key={headerGroup.id}
+              className="flex flex-row justify-between border-b border-slate-200 bg-slate-100  text-xs font-semibold uppercase text-slate-500"
+            >
               {headerGroup.headers.map((header) => (
-                <th key={header.id}>
+                <div key={header.id} className="px-4 py-3">
                   {header.isPlaceholder
                     ? null
                     : flexRender(
                         header.column.columnDef.header,
                         header.getContext(),
                       )}
-                </th>
+                </div>
               ))}
-            </tr>
+            </div>
           ))}
-        </thead>
-        <tbody>
-          {table.getRowModel().rows.map((row) => (
-            <tr key={row.id}>
-              {row.getVisibleCells().map((cell) => (
-                <td key={cell.id}>
-                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                </td>
-              ))}
-            </tr>
+          {table.getRowModel().rows.map((row, index) => (
+            <JourneyItem
+              key={row.id}
+              item={row}
+              isLast={index === table.getRowModel().rows.length - 1}
+            />
           ))}
-        </tbody>
-      </table>
+        </div>
+      </div>
     </div>
   );
 };
+
+
