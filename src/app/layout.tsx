@@ -1,8 +1,9 @@
 import "@/styles/globals.css";
 import { Inter as FontSans } from "next/font/google";
 
-import { TRPCReactProvider } from "@/trpc/react";
+import { TooltipProvider } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
+import { TRPCReactProvider } from "@/trpc/react";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -28,7 +29,9 @@ export default function RootLayout({
           fontSans.variable,
         )}
       >
-        <TRPCReactProvider>{children}</TRPCReactProvider>
+        <TRPCReactProvider>
+          <TooltipProvider>{children}</TooltipProvider>
+        </TRPCReactProvider>
       </body>
     </html>
   );

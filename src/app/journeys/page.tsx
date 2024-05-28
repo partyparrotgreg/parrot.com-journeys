@@ -1,6 +1,7 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { JourneysTable } from "./_components/journeys-table";
 
 export default function JourneyPageGroup() {
   return (
@@ -16,8 +17,9 @@ export default function JourneyPageGroup() {
           <Button>New</Button>
         </div>
       </div>
-      <div>Header</div>
-      <div className="grid grid-cols-3 gap-6"></div>
+      <div>
+        <JourneysTable />
+      </div>
     </main>
   );
 }
