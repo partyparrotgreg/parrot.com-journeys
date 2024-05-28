@@ -97,3 +97,78 @@ export const journeyList = [
     tags: ["Shopify", "Email", "WhatsApp"],
   },
 ];
+
+export type JourneyType = {
+  id: number;
+  created: Date;
+  updated: Date;
+  title: string;
+  description?: string;
+  type: CampaingTypeEnum;
+  channels: ChannelsEnum[];
+  tags: string[];
+  status: "active" | "inactive" | "draft";
+};
+
+export const journeys: JourneyType[] = [
+  {
+    id: 1,
+    created: new Date(),
+    updated: new Date(),
+    title: "Abandoned cart recovery",
+    description:
+      "Don't leave your carts abandoned! Recover them and drive up sales with this abandoned cart series.",
+    type: CampaingTypeEnum.STANDARD,
+    channels: [ChannelsEnum.EMAIL, ChannelsEnum.WHATSAPP],
+    tags: ["Shopify", "Email", "WhatsApp"],
+    status: "active",
+  },
+  {
+    id: 2,
+    created: new Date(),
+    updated: new Date(),
+    title: "Welcome Series",
+    description:
+      "Welcome new subscribers with a WhatsApp message series that provides an introduction to your business and encourages conversion.",
+    type: CampaingTypeEnum.STANDARD,
+    channels: [ChannelsEnum.WHATSAPP],
+    tags: ["List", "WhatsApp"],
+    status: "inactive",
+  },
+  {
+    id: 3,
+    created: new Date(),
+    updated: new Date(),
+    title: "Post Purchase Thank you",
+    description:
+      'Convert would-be one time buyers into repeat purchasers with a compelling "Thank you" offer that brings someone back to keep shopping immediately.',
+    type: CampaingTypeEnum.MULTI_CHANNEL,
+    channels: [ChannelsEnum.WHATSAPP, ChannelsEnum.SMS, ChannelsEnum.EMAIL],
+    tags: ["Shopify", "WhatsApp", "SMS", "Email"],
+    status: "draft",
+  },
+  {
+    id: 4,
+    created: new Date(),
+    updated: new Date(),
+    title: "Abandoned cart recovery",
+    description:
+      "Don't leave your carts abandoned! Recover them and drive up sales with this abandoned cart series.",
+    type: CampaingTypeEnum.STANDARD,
+    channels: [ChannelsEnum.WHATSAPP],
+    tags: ["Shopify", "WhatsApp"],
+    status: "active",
+  },
+  {
+    id: 5,
+    created: new Date(),
+    updated: new Date(),
+    title: "Welcome Series",
+    description:
+      "Welcome new subscribers with a SMS message series that provides an introduction to your business and encourages conversion.",
+    type: CampaingTypeEnum.STANDARD,
+    channels: [ChannelsEnum.SMS],
+    tags: ["List", "SMS"],
+    status: "inactive",
+  },
+];

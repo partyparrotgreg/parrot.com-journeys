@@ -7,29 +7,39 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import { useMemo, useState } from "react";
-import { campaingTemplates, type CampaignType } from "../_data";
+import { journeys, type JourneyType } from "../_data";
 
 export const JourneysTable = () => {
-  const [data, setData] = useState<CampaignType[]>([...campaingTemplates]);
+  const [data, setData] = useState<JourneyType[]>([...journeys]);
   const fallbackData = useMemo(() => [], []);
-  const columnHelper = createColumnHelper<CampaignType>();
+  const columnHelper = createColumnHelper<JourneyType>();
 
   const columns = useMemo(
     () => [
       columnHelper.accessor((row) => row.title, {
         id: "title",
-        cell: (info) => <i>{info.getValue()}</i>,
-        header: () => <span>Title</span>,
+        cell: (cell) => <div>{cell.getValue()}</div>,
+        header: () => <span>Name</span>,
       }),
       columnHelper.accessor((row) => row.type, {
         id: "type",
-        cell: (info) => <i>{info.getValue()}</i>,
+        cell: (cell) => <div>{cell.getValue()}</div>,
         header: () => <span>Type</span>,
       }),
-      columnHelper.accessor((row) => row.description, {
-        id: "description",
-        cell: (info) => <i>{info.getValue()}</i>,
+      columnHelper.accessor((row) => row.updated, {
+        id: "updated",
+        cell: (cell) => <div>Date</div>,
         header: () => <span>Description</span>,
+      }),
+      columnHelper.accessor((row) => row.channels, {
+        id: "channels",
+        cell: (cell) => <div>{cell.getValue()}</div>,
+        header: () => <span>Channels</span>,
+      }),
+      columnHelper.accessor((row) => row.status, {
+        id: "status",
+        cell: (cell) => <div>{cell.getValue()}</div>,
+        header: () => <span>Channels</span>,
       }),
     ],
     [columnHelper],

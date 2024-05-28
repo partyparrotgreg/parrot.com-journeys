@@ -3,6 +3,7 @@ import { Inter as FontSans } from "next/font/google";
 
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
+import { AppStoreProvider } from "@/stores/app-store-provider";
 import { TRPCReactProvider } from "@/trpc/react";
 
 const fontSans = FontSans({
@@ -29,9 +30,11 @@ export default function RootLayout({
           fontSans.variable,
         )}
       >
-        <TRPCReactProvider>
-          <TooltipProvider>{children}</TooltipProvider>
-        </TRPCReactProvider>
+        <AppStoreProvider>
+          <TRPCReactProvider>
+            <TooltipProvider>{children}</TooltipProvider>
+          </TRPCReactProvider>
+        </AppStoreProvider>
       </body>
     </html>
   );
