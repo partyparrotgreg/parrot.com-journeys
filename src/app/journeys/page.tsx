@@ -1,13 +1,13 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { apiEndpointURL } from "@/lib/utils";
+import { env } from "@/env";
 import { ArchiveIcon } from "lucide-react";
 import Link from "next/link";
 import { JourneysTable } from "./_components/journeys-table";
 import { type JourneyType } from "./_data";
 
 async function getData() {
-  const res = await fetch(`${apiEndpointURL}/journeys`);
+  const res = await fetch(`${env.NEXT_PUBLIC_API_URL}/api/journeys`);
 
   if (!res.ok) {
     throw new Error("Failed to fetch data");
