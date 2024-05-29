@@ -14,11 +14,13 @@ import {
 import { type Row } from "@tanstack/react-table";
 import {
   ArchiveIcon,
+  CloudOffIcon,
   CopyCheck,
   MoreHorizontalIcon,
   MousePointerClick,
   PencilIcon,
   TrashIcon,
+  UploadCloud,
 } from "lucide-react";
 import { toast } from "sonner";
 import { type JourneyType } from "../_data";
@@ -72,12 +74,21 @@ export const JourneyItem = ({
       <div>
         <StatusDot status={item.original.status} />
       </div>
-      <DropdownMenuInline id={item.original.id} />
+      <DropdownMenuInline
+        id={item.original.id}
+        isDraft={item.original.status === "draft"}
+      />
     </div>
   );
 };
 
-const DropdownMenuInline = ({ id }: { id: number }) => {
+const DropdownMenuInline = ({
+  id,
+  isDraft,
+}: {
+  id: number;
+  isDraft?: boolean;
+}) => {
   const handleOnClick = (e: React.MouseEvent) => {
     e.stopPropagation();
     toast("Deleted");
@@ -90,6 +101,16 @@ const DropdownMenuInline = ({ id }: { id: number }) => {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
+        {isDraft ? (
+          <DropdownMenuItem>
+            <UploadCloud className="mr-2 h-4 w-4" /> Publish
+          </DropdownMenuItem>
+        ) : (
+          <DropdownMenuItem>
+            <CloudOffIcon className="mr-2 h-4 w-4" /> Unpublish
+          </DropdownMenuItem>
+        )}
+        <DropdownMenuSeparator />
         <DropdownMenuItem>
           <PencilIcon className="mr-2 h-4 w-4" /> Edit
         </DropdownMenuItem>

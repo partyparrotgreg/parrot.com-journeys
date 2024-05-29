@@ -78,6 +78,7 @@
     "zustand": "^4.5.2"
   },
   "devDependencies": {
+    "@faker-js/faker": "^8.4.1",
     "@svgr/webpack": "^8.1.0",
     "@types/eslint": "^8.56.2",
     "@types/node": "^20.11.20",

@@ -85,7 +85,7 @@ export const campaingTemplates: CampaignType[] = [
   },
 ];
 
-
+export const statuses = ["all", "live", "draft", "archived"];
 
 export type JourneyType = {
   id: number;
@@ -97,7 +97,7 @@ export type JourneyType = {
   type: CampaingTypeEnum;
   channels: ChannelsEnum[];
   tags: string[];
-  status: "live" | "inactive" | "draft";
+  status: "live" | "inactive" | "draft" | "archived";
 };
 
 export const journeys: JourneyType[] = [
@@ -124,7 +124,7 @@ export const journeys: JourneyType[] = [
     type: CampaingTypeEnum.STANDARD,
     channels: [ChannelsEnum.WHATSAPP],
     tags: ["List", "WhatsApp"],
-    status: "inactive",
+    status: "draft",
     trigger: "New subscriber",
   },
   {
@@ -163,7 +163,7 @@ export const journeys: JourneyType[] = [
     type: CampaingTypeEnum.STANDARD,
     channels: [ChannelsEnum.SMS],
     tags: ["List", "SMS"],
-    status: "inactive",
+    status: "archived",
     trigger: "New subscriber",
   },
 ];

@@ -1,5 +1,6 @@
 "use client";
 import { Input } from "@/components/ui/input";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   createColumnHelper,
   flexRender,
@@ -9,11 +10,13 @@ import {
   type ColumnFiltersState,
 } from "@tanstack/react-table";
 import { useMemo, useState } from "react";
-import { journeys, type JourneyType } from "../_data";
+import { journeys, statuses, type JourneyType } from "../_data";
 import { JourneyItem } from "./journey-item";
-import { StatusBox } from "./status-box";
+import { TagsBox } from "./tags-box";
+import { UseCasesBox } from "./use-cases";
 
 export const JourneysTable = () => {
+  const [currentTab, setCurrentTab] = useState<string>("all");
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [data, setData] = useState<JourneyType[]>([...journeys]);
   const columnHelper = createColumnHelper<JourneyType>();
@@ -58,8 +61,28 @@ export const JourneysTable = () => {
   return (
     <div className="flex w-full flex-col gap-6">
       <div className="flex flex-row gap-4">
+        <Tabs defaultValue={currentTab}>
+          <TabsList>
+            {statuses.map((status) => (
+              <TabsTrigger
+                value={status}
+                key={`tab-${status}`}
+                onClick={() => {
+                  setCurrentTab(status);
+                  if (status === "all") return setData(journeys);
+                  setData(
+                    journeys.filter((journey) => journey.status === status),
+                  );
+                }}
+              >
+                {status}
+              </TabsTrigger>
+            ))}
+          </TabsList>
+        </Tabs>
         <Input type="text" placeholder="Search..." />
-        <StatusBox />
+        <UseCasesBox />
+        <TagsBox />
       </div>
       <div className="flex grow flex-col gap-2">
         <div className="overflow-hidden rounded-xl border border-slate-200">
