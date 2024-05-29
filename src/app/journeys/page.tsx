@@ -7,7 +7,7 @@ import { JourneysTable } from "./_components/journeys-table";
 import { type JourneyType } from "./_data";
 
 async function getData() {
-  const res = await fetch(`${env.NEXT_PUBLIC_API_URL}/api/journeys`);
+  const res = await fetch(`${env.API_URL}/api/journeys`);
 
   if (!res.ok) {
     throw new Error("Failed to fetch data");
