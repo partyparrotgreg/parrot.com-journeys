@@ -1,15 +1,12 @@
 import {
-  SlidersHorizontal,
+  AppWindowMac,
   Bell,
+  BoxIcon,
+  BrushIcon,
   HelpCircle,
   HomeIcon,
-  MailIcon,
-  SendIcon,
+  SlidersHorizontal,
   WavesIcon,
-  FilesIcon,
-  UserSquare2Icon,
-  AppWindowMacIcon,
-  BarChart2Icon,
 } from "lucide-react";
 
 export const settings = [
@@ -29,37 +26,44 @@ export const settings = [
 
 export const navigation = [
   {
-    label: "Home",
+    label: "Start here",
     icon: HomeIcon,
     path: "/",
   },
   {
-    label: "Inbox AI",
-    icon: MailIcon,
+    label: "Wireframes",
+    icon: BoxIcon,
+    path: "/wireframes",
   },
   {
-    label: "Campaigns",
-    icon: SendIcon,
+    label: "Figma Designs",
+    icon: BrushIcon,
+    path: "/figma",
+  },
+  {
+    label: "Figma Prototype",
+    icon: AppWindowMac,
+    path: "/prototype",
   },
   {
     label: "Journeys",
     icon: WavesIcon,
     path: "/journeys",
   },
-  {
-    label: "Sign-up forms",
-    icon: FilesIcon,
-  },
-  {
-    label: "Audience",
-    icon: UserSquare2Icon,
-  },
-  {
-    label: "Content",
-    icon: AppWindowMacIcon,
-  },
-  {
-    label: "Analytics",
-    icon: BarChart2Icon,
-  },
+  // {
+  //   label: "Sign-up forms",
+  //   icon: FilesIcon,
+  // },
+  // {
+  //   label: "Audience",
+  //   icon: UserSquare2Icon,
+  // },
+  // {
+  //   label: "Content",
+  //   icon: AppWindowMacIcon,
+  // },
+  // {
+  //   label: "Analytics",
+  //   icon: BarChart2Icon,
+  // },
 ];

@@ -24,9 +24,7 @@ export const JourneysTable = ({
   console.log(journeys);
   const [currentTab, setCurrentTab] = useState<string>("all");
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
-  const [filteredData, setFilteredData] = useState<JourneyType[]>([
-    ...journeys,
-  ]);
+  const [filteredData, setFilteredData] = useState<JourneyType[]>(data ?? []);
   const columnHelper = createColumnHelper<JourneyType>();
 
   const columns = useMemo(
@@ -55,7 +53,7 @@ export const JourneysTable = ({
     ],
     [columnHelper],
   );
-  const initialData = data ?? [];
+  const initialData = filteredData ?? [];
 
   const table = useReactTable({
     columns,
@@ -88,7 +86,7 @@ export const JourneysTable = ({
                 key={`tab-${status}`}
                 onClick={() => {
                   setCurrentTab(status);
-                  if (status === "all") return setFilteredData(journeys);
+                  if (status === "all") return setFilteredData(data);
                   setFilteredData(
                     data.filter((journey) => journey.status === status),
                   );
