@@ -16,6 +16,7 @@ import { TagsBox } from "./tags-box";
 import { UseCasesBox } from "./use-cases";
 
 export const JourneysTable = () => {
+  console.log(journeys);
   const [currentTab, setCurrentTab] = useState<string>("all");
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [data, setData] = useState<JourneyType[]>([...journeys]);
