@@ -1,10 +1,24 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { env } from "@/env";
 import { ArchiveIcon } from "lucide-react";
 import Link from "next/link";
 import { JourneysTable } from "./_components/journeys-table";
+import { type JourneyType } from "./_data";
 
-export default function JourneyPageGroup() {
+async function getData() {
+  const res = await fetch(`${env.NEXTAUTH_URL}/api/journeys`);
+
+  if (!res.ok) {
+    throw new Error("Failed to fetch data");
+  }
+
+  return res.json();
+}
+
+export default async function JourneyPageGroup() {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+  const data = await getData();
   return (
     <main className="flex flex-col gap-8">
       <div className="relative flex flex-row justify-between">
@@ -24,7 +38,7 @@ export default function JourneyPageGroup() {
         </div>
       </div>
       <div>
-        <JourneysTable />
+        <JourneysTable data={data as JourneyType[]} />
       </div>
     </main>
   );

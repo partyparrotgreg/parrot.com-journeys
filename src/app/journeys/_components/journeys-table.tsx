@@ -1,5 +1,6 @@
 "use client";
 import { Input } from "@/components/ui/input";
+import { Skeleton } from "@/components/ui/skeleton";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   createColumnHelper,
@@ -15,11 +16,17 @@ import { JourneyItem } from "./journey-item";
 import { TagsBox } from "./tags-box";
 import { UseCasesBox } from "./use-cases";
 
-export const JourneysTable = () => {
+export const JourneysTable = ({
+  data,
+}: {
+  data: JourneyType[] | undefined;
+}) => {
   console.log(journeys);
   const [currentTab, setCurrentTab] = useState<string>("all");
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
-  const [data, setData] = useState<JourneyType[]>([...journeys]);
+  const [filteredData, setFilteredData] = useState<JourneyType[]>([
+    ...journeys,
+  ]);
   const columnHelper = createColumnHelper<JourneyType>();
 
   const columns = useMemo(
@@ -48,16 +55,27 @@ export const JourneysTable = () => {
     ],
     [columnHelper],
   );
+  const initialData = data ?? [];
 
   const table = useReactTable({
     columns,
-    data,
+    data: initialData,
     state: {
       columnFilters,
     },
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
   });
+
+  if (!data)
+    return (
+      <div className="flex items-center space-x-4">
+        <div className="space-y-2">
+          <Skeleton className="h-4 w-[250px]" />
+          <Skeleton className="h-4 w-[200px]" />
+        </div>
+      </div>
+    );
 
   return (
     <div className="flex w-full flex-col gap-6">
@@ -70,9 +88,9 @@ export const JourneysTable = () => {
                 key={`tab-${status}`}
                 onClick={() => {
                   setCurrentTab(status);
-                  if (status === "all") return setData(journeys);
-                  setData(
-                    journeys.filter((journey) => journey.status === status),
+                  if (status === "all") return setFilteredData(journeys);
+                  setFilteredData(
+                    data.filter((journey) => journey.status === status),
                   );
                 }}
               >
