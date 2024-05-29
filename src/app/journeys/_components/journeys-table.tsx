@@ -16,15 +16,13 @@ import { JourneyItem } from "./journey-item";
 import { TagsBox } from "./tags-box";
 import { UseCasesBox } from "./use-cases";
 
-export const JourneysTable = ({
-  data,
-}: {
-  data: JourneyType[] | undefined;
-}) => {
+export const JourneysTable = () => {
   console.log(journeys);
   const [currentTab, setCurrentTab] = useState<string>("all");
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
-  const [filteredData, setFilteredData] = useState<JourneyType[]>(data ?? []);
+  const [filteredData, setFilteredData] = useState<JourneyType[]>(
+    journeys ?? [],
+  );
   const columnHelper = createColumnHelper<JourneyType>();
 
   const columns = useMemo(
@@ -65,7 +63,7 @@ export const JourneysTable = ({
     getFilteredRowModel: getFilteredRowModel(),
   });
 
-  if (!data)
+  if (!journeys)
     return (
       <div className="flex items-center space-x-4">
         <div className="space-y-2">
@@ -86,9 +84,9 @@ export const JourneysTable = ({
                 key={`tab-${status}`}
                 onClick={() => {
                   setCurrentTab(status);
-                  if (status === "all") return setFilteredData(data);
+                  if (status === "all") return setFilteredData(journeys);
                   setFilteredData(
-                    data.filter((journey) => journey.status === status),
+                    journeys.filter((journey) => journey.status === status),
                   );
                 }}
               >
